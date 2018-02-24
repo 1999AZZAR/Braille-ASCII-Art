@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Basic SEO Meta Tags -->
+    <title>Braille ASCII Art</title>
+    <meta name="description" content="Explore the unique combination of Braille and ASCII art. Dive into innovative and creative visual representations using Braille patterns and ASCII characters.">
+
+    <!-- Keywords -->
+    <meta name="keywords" content="Braille, ASCII art, Azzar Budiyanto, creative art, visual representation, Braille patterns, ASCII characters, innovative art, digital art, accessibility art, artistic expression, graphic design, typography, unique art, Braille ASCII conversion, creative coding, digital accessibility, art and technology, interactive art, online art gallery, ASCII art generator, Braille art examples, coding art, visual storytelling, tech art">
+
+    <!-- Author -->
+    <meta name="author" content="Azzar Budiyanto">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Braille ASCII Art ">
+    <meta property="og:description" content="Explore the unique combination of Braille and ASCII art. Dive into innovative and creative visual representations using Braille patterns and ASCII characters.">
+    <meta property="og:image" content="https://1999azzar.github.io/Braille-ASCII-Art/og-image.png">
+    <meta property="og:url" content="https://1999azzar.github.io/Braille-ASCII-Art/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Braille ASCII Art ">
+    <meta name="twitter:description" content="Explore the unique combination of Braille and ASCII art. Dive into innovative and creative visual representations using Braille patterns and ASCII characters.">
+    <meta name="twitter:image" content="https://1999azzar.github.io/Braille-ASCII-Art/og-image.png">
+    <meta name="twitter:site" content="@yourtwitterhandle"> <!-- Replace with your Twitter handle if available -->
+
+    <!-- Google / Schema.org -->
+    <meta itemprop="name" content="Braille ASCII Art ">
+    <meta itemprop="description" content="Explore the unique combination of Braille and ASCII art. Dive into innovative and creative visual representations using Braille patterns and ASCII characters.">
+    <meta itemprop="image" content="https://1999azzar.github.io/Braille-ASCII-Art/og-image.png">
+
+    <!-- Other Meta Tags -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://1999azzar.github.io/Braille-ASCII-Art/">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="https://1999azzar.github.io/Braille-ASCII-Art/favicon.ico">
+
+    <!-- Stylesheets and Fonts -->
+    <link rel="stylesheet" href="styles.css?v=6">
+
+    <!-- Additional SEO Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Braille ASCII Art">
+
+    <!-- Language / Localization -->
+    <meta name="language" content="English">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="form-container">
+                <h1 class="toggle-sidebar settings-header">Settings</h1>
+                <form>
+                    <p>
+                        <label for="filepicker">Image</label>
+                        <input type="file" id="filepicker" accept=".png,.jpeg,.jpg">
+                    </p>
+
+                    <p>
+                        <label for="dither">Dither Mode</label>
+                        <select id="dither">
+                            <option value="floydSteinberg">Floyd-Steinberg</option>
+                            <option value="stucki">Stucki</option>
+                            <option value="atkinson">Atkinson</option>
+                            <option value="threshold">Threshold</option>
+                            <option value="burkes">Burkes</option>
+                            <option value="sierra">Sierra</option>
+                            <option value="jarvisJudiceNinke">Jarvis-Judice-Ninke</option>
+<!--                             <option value="ordered3x3">Ordered 3x3</option> -->
+<!--                             <option value="ordered4x4">Ordered 4x4</option> -->
+                            <option value="random">Random</option>
+                            <option value="sobelEdge">Sobel Edge</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="threshold">Threshold</label>
+                        <input type="range" id="threshold" min="0" max="254" value="127">
+                    </p>
+                    <p>
+                        <label for="width">Width</label>
+                        <input type="number" id="width" value="100" step="5">
+                    </p>
+                    <p>
+                        <label for="invert">Invert</label>
+                        <input type="checkbox" id="invert">
+                    </p>
+                    <p>
+                        <label for="font-size">Preview font size</label>
+                        <input type="number" id="font-size" min="2" value="10">
+                    </p>
+                </form>
+                <div class="image-container">
+                    <img id="image-preview" alt="Image Preview" />
+                </div>
+            </div>
+        </aside>
+        <main class="main-content">
+            <div class="output-container">
+                <h1 class="toggle-sidebar">Braille ASCII Art</h1>
+                <h2>result</h2>
+                <p>
+                    (<span id="char-count">0</span>‎ characters)
+                </p>
+                <div id="output" contenteditable="false"></div>
+                <div id="downloads">
+                    <button id="copy"><h3>Copy</h3></button>
+                    <button id="download-txt"><h3>Download</h3></button> <!-- download as txt document -->
+                <!--<button id="download-img">Download as Image</button> -->
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="dist/index.js?v=3" type="module"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
