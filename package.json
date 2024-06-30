@@ -13,7 +13,7 @@
     "test": "watch && serve"
   },
   "devDependencies": {
-    "http-server": "^0.11.1",
+    "http-server": "^14.1.1",
     "typescript": "^4.9.3"
   }
 }

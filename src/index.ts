@@ -1,45 +1,76 @@
-import { $, on, rgbaOffset } from './helpers.js';
+import { $, rgbaOffset } from './helpers.js';
 import KernelDitherer from './kernel-ditherer.js';
 
 // Braille symbol is 2x4 dots
 const asciiXDots = 2,
-	asciiYDots = 4;
+    asciiYDots = 4;
 
-type DithererName = 'threshold' | 'floydSteinberg' | 'stucki' | 'atkinson';
+type DithererName = 'threshold' | 'floydSteinberg' | 'stucki' | 'atkinson' | 'bayer' | 'burkes' | 'sierra' | 'jarvisJudiceNinke' | 'ordered3x3' | 'ordered4x4';
+
+interface Ditherer {
+    dither(pixels: ImageData, threshold: number): ImageData;
+}
 
 const ditherers: Record<DithererName, Ditherer> = {
-	threshold: new KernelDitherer(
-		[ 0, 0 ],
-		[],
-		1,
-	),
-	floydSteinberg: new KernelDitherer(
-		[ 1, 0 ],
-		[
-			[ 0, 0, 7 ],
-			[ 3, 5, 1 ],
-		],
-		16,
-	),
-	stucki: new KernelDitherer(
-		[ 2, 0 ],
-		[
-			[ 0, 0, 0, 8, 4 ],
-			[ 2, 4, 8, 4, 2 ],
-			[ 1, 2, 4, 2, 1 ],
-		],
-		42,
-	),
-	atkinson: new KernelDitherer(
-		[ 1, 0 ],
-		[
-			[ 0, 0, 1, 1 ],
-			[ 1, 1, 1, 0 ],
-			[ 0, 1, 0, 0 ],
-		],
-		8,
-	),
+    threshold: new KernelDitherer(
+        [0, 0],
+        [],
+        1,
+    ),
+    floydSteinberg: new KernelDitherer(
+        [1, 0],
+        [
+            [0, 0, 7],
+            [3, 5, 1],
+        ],
+        16,
+    ),
+    stucki: new KernelDitherer(
+        [2, 0],
+        [
+            [0, 0, 0, 8, 4],
+            [2, 4, 8, 4, 2],
+            [1, 2, 4, 2, 1],
+        ],
+        42,
+    ),
+    atkinson: new KernelDitherer(
+        [1, 0],
+        [
+            [0, 0, 1, 1],
+            [1, 1, 1, 0],
+            [0, 1, 0, 0],
+        ],
+        8,
+    ),
+    burkes: new KernelDitherer(
+        [2, 0],
+        [
+            [0, 0, 0, 8, 4],
+            [2, 4, 8, 4, 2],
+        ],
+        32,
+    ),
+    sierra: new KernelDitherer(
+        [2, 0],
+        [
+            [0, 0, 0, 5, 3],
+            [2, 4, 5, 4, 2],
+            [0, 2, 3, 2, 0],
+        ],
+        32,
+    ),
+    jarvisJudiceNinke: new KernelDitherer(
+        [2, 0],
+        [
+            [0, 0, 0, 7, 5],
+            [3, 5, 7, 5, 3],
+            [1, 3, 5, 3, 1],
+        ],
+        48,
+    ),
 };
+
 
 let dithererName: DithererName = 'floydSteinberg',
 	invert = false,
