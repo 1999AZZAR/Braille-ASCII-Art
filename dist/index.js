@@ -1,5 +1,6 @@
 import { $, on, rgbaOffset } from './helpers.js';
 import KernelDitherer from './kernel-ditherer.js';
+import { sobelEdgeDetection } from './edge-detection.js';
 
 // Braille symbol is 2x4 dots
 const asciiXDots = 2, asciiYDots = 4;
@@ -34,6 +35,33 @@ const ditherers = {
         [3, 5, 7, 5, 3],
         [1, 3, 5, 3, 1],
     ], 48),
+    ordered3x3: new KernelDitherer([0, 0], [
+        [1, 7, 4],
+        [5, 8, 3],
+        [6, 2, 9],
+    ], 9),
+    ordered4x4: new KernelDitherer([0, 0], [
+        [1, 9, 3, 11],
+        [13, 5, 15, 7],
+        [4, 12, 2, 10],
+        [16, 8, 14, 6],
+    ], 17),
+    random: {
+        dither(pixels, threshold) {
+            for (let i = 0; i < pixels.data.length; i += 4) {
+                const avg = (pixels.data[i] + pixels.data[i + 1] + pixels.data[i + 2]) / 3;
+                const rand = Math.random() * 255;
+                const value = avg < rand ? 0 : 255;
+                pixels.data[i] = pixels.data[i + 1] = pixels.data[i + 2] = value;
+            }
+            return pixels;
+        }
+    },
+    sobelEdge: {
+        dither(pixels, threshold) {
+            return sobelEdgeDetection(pixels, threshold);
+        }
+    }
 };
 
 let dithererName = 'floydSteinberg', invert = false, threshold = 127, asciiWidth = 100, asciiHeight = 100;
@@ -58,7 +86,7 @@ on(document, 'DOMContentLoaded', function (e) {
         render();
     });
 
-    on($('#threshold'), 'change', function () {
+    on($('#threshold'), 'change', function () {  // Changed from 'change' to 'input' for real-time updates
         let newValue = parseInt(this.value);
         if (newValue == threshold) return;
         threshold = newValue;

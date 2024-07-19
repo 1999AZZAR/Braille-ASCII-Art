@@ -63,6 +63,7 @@
                         <label for="filepicker">Image</label>
                         <input type="file" id="filepicker" accept=".png,.jpeg,.jpg">
                     </p>
+
                     <p>
                         <label for="dither">Dither Mode</label>
                         <select id="dither">
@@ -73,8 +74,13 @@
                             <option value="burkes">Burkes</option>
                             <option value="sierra">Sierra</option>
                             <option value="jarvisJudiceNinke">Jarvis-Judice-Ninke</option>
+<!--                             <option value="ordered3x3">Ordered 3x3</option> -->
+<!--                             <option value="ordered4x4">Ordered 4x4</option> -->
+                            <option value="random">Random</option>
+                            <option value="sobelEdge">Sobel Edge</option>
                         </select>
                     </p>
+
                     <p>
                         <label for="threshold">Threshold</label>
                         <input type="range" id="threshold" min="0" max="254" value="127">
